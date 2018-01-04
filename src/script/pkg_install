@@ -1,0 +1,39 @@
+# -*- coding:utf-8 -*-
+import os, time, unittest
+#from selenium import webdriver
+from appium import webdriver
+import src.image.image
+
+PATH = lambda p:os.path.abspath(os.path.join(os.path.dirname(__file__),p))
+
+desired_caps = {}
+desired_caps['platformName'] = 'Android'  # 设备系统
+desired_caps['platformVersion'] = '5.0'  # 设备系统版本
+desired_caps['deviceName'] = 'HUAWEI Mate 9'  #  设备名称
+
+#desired_caps['app'] = PATH(r"")
+desired_caps['appPackage'] = 'com.wepie.wespy'
+desired_caps['appActivity'] = '.module.login.start.StartActivity'
+
+driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
+time.sleep(5)
+
+createQqLoginButton = None
+try:
+    createQqLoginButton = driver.find_element_by_id("com.wepie.wespy:id/qq_login_frameLayout")
+finally:
+    createQqLoginButton.click()
+time.sleep(5)
+
+print driver.contexts
+qqButton = None
+try:
+    qqButton = driver.find_element_by_id("com.tencent.mobileqq:id/")
+    qqButton.click()
+except:
+    driver.get_screenshot_as_file("image/image_repo/login_qq_m2017.png")
+    pts = src.image.image.find_image_position('image/image_repo/login_qq_m2017.png', 'image/image_repo/login_logo_qq.png',
+                                              outfile='image/image_repo/result.png')
+    driver.tap(pts[2])
+time.sleep(5)
+driver.get_screenshot_as_file("image/results/login_png.png")
