@@ -8,23 +8,27 @@ import src.PO.BasePage as BP
 import time
 
 class test_login(unittest.TestCase):
-    driver=0
+    #driver=0
 
-    @classmethod
-    def set_driver(cls,rdriver):
-        cls.driver = rdriver
+
+    # @classmethod
+    # def set_driver(cls,rdriver):
+    #     cls.driver = rdriver
+
+    def __init__(self,methodname,driver):
+        super(test_login,self).__init__(methodname)
+        self.driver = driver
+
+        #self.current_path = None
 
     def setUp(self):
         pass
 
-    def tearDown(self):
-        os.remove(self.current_path)
-
     def runTest(self):
         pass
 
-    def test_login(self, result=None):
-        self.bp = BP.BasePage(self.__class__.driver)
+    def function(self, result=None):
+        self.bp = BP.BasePage(self.driver)
 
         #qq登陆
 
@@ -50,7 +54,8 @@ class test_login(unittest.TestCase):
         except Exception as e:
 #            print os.getcwd()
             #Utils.logging.error(e)
-            self.current_path = os.path.join(os.getcwd(),"image/image_repo/login_qq_%s.png" % str(int(time.time())))
+            self.current_path = os.path.join(os.getcwd(), "image/image_repo/login_qq_%s.png" % str(int(time.time())))
+
             print self.current_path
             try:
                 self.bp.get_screenshot_as_file(self.current_path)
@@ -90,3 +95,7 @@ class test_login(unittest.TestCase):
         # Butoon = None
         # Butoon = self.bp.driver.find_element_by_android_uiautomator('new UiSelector().resourceId("com.wepie.wespy:id/home_head_image_border")')
         # Butoon.click()
+
+    def tearDown(self):
+        #pass#
+        os.remove(self.current_path)

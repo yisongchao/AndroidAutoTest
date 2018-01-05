@@ -8,11 +8,15 @@ from src.ma.RunScript import get_focused_package_xml
 import time
 
 class test_songli(unittest.TestCase):
-    driver=0
+    # driver=0
+    #
+    # @classmethod
+    # def set_driver(cls,rdriver):
+    #     cls.driver = rdriver
 
-    @classmethod
-    def set_driver(cls,rdriver):
-        cls.driver = rdriver
+    def __init__(self,methodname,driver):
+        super(test_songli,self).__init__(methodname)
+        self.driver = driver
 
     def setUp(self):
         pass
@@ -24,9 +28,9 @@ class test_songli(unittest.TestCase):
         pass
 
     @unittest.skip('skip test')
-    def test_songli(self, result=None):
-        self.bp = BP.BasePage(self.__class__.driver)
-        print self.__class__.driver
+    def function(self, result=None):
+        self.bp = BP.BasePage(self.driver)
+        #print self.__class__.driver
         Button = None
         try:
             Button = self.bp.WaitUtil_Element("com.wepie.wespy:id/home_head_image_border")

@@ -83,12 +83,15 @@ class AppiumClient():
                 module_name = 'src.testcase.' + i[0:-3]
                 module = __import__(module_name, globals(), locals(), [i], -1)
                 c = getattr(module, i[0:-3])
-                c.set_driver(self.driver)
-                suite = unittest.TestLoader().loadTestsFromTestCase(c)
+                #c.set_driver(self.driver)
+                test_suite = unittest.TestSuite()
+                #suite = unittest.TestLoader().loadTestsFromTestCase(c)
+                tcase = c('function',self.driver)
+                test_suite.addTest(tcase)
                 if i.startswith('test_login'):
-                    case_l.insert(0,suite)
+                    case_l.insert(0,test_suite)
                 else:
-                    case_l.append(suite)
+                    case_l.append(test_suite)
                 print case_l
 
                 #suite.addTest(BaseCase.ParametrizedTestCase.parametrize(i, param=self.driver))

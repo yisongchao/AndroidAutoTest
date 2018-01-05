@@ -7,11 +7,15 @@ import src.PO.BasePage as BP
 import time
 
 class test_nearby(unittest.TestCase):
-    driver=0
+    # driver=0
+    #
+    # @classmethod
+    # def set_driver(cls,rdriver):
+    #     cls.driver = rdriver
 
-    @classmethod
-    def set_driver(cls,rdriver):
-        cls.driver = rdriver
+    def __init__(self,methodname,driver):
+        super(test_nearby,self).__init__(methodname)
+        self.driver = driver
 
     def setUp(self):
         pass
@@ -22,9 +26,9 @@ class test_nearby(unittest.TestCase):
     def runTest(self):
         pass
 
-    @unittest.skip('skip test')
-    def test_nearby(self, result=None):
-        self.bp = BP.BasePage(self.__class__.driver)
+    #@unittest.skip('skip test')
+    def function(self, result=None):
+        self.bp = BP.BasePage(self.driver)
 
         #qq登陆
 

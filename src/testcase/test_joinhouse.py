@@ -5,11 +5,15 @@ import src.PO.BasePage as BP
 
 
 class test_joinhouse(unittest.TestCase):
-    driver=0
+    #driver=0
 
-    @classmethod
-    def set_driver(cls,rdriver):
-        cls.driver = rdriver
+    # @classmethod
+    # def set_driver(cls,rdriver):
+    #     cls.driver = rdriver
+
+    def __init__(self,methodname,driver):
+        super(test_joinhouse,self).__init__(methodname)
+        self.driver = driver
 
     def setUp(self):
         pass
@@ -21,9 +25,9 @@ class test_joinhouse(unittest.TestCase):
         pass
 
     @unittest.skip('skip test')
-    def test_joinhouse(self, result=None):
-        print self.__class__.driver
-        self.bp = BP.BasePage(self.__class__.driver)
+    def function(self, result=None):
+        #print self.driver
+        self.bp = BP.BasePage(self.driver)
 
         Button = None
         try:
